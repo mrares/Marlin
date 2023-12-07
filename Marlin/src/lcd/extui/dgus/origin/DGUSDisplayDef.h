@@ -119,7 +119,7 @@ constexpr uint16_t VP_POWER_LOSS_RECOVERY = 0x2180;
 // Fan Control Buttons , switch between "off" and "on"
 constexpr uint16_t VP_FAN0_CONTROL = 0x2200;
 constexpr uint16_t VP_FAN1_CONTROL = 0x2202;
-//constexpr uint16_t VP_FAN2_CONTROL = 0x2204;
+constexpr uint16_t VP_FAN2_CONTROL = 0x2204;
 //constexpr uint16_t VP_FAN3_CONTROL = 0x2206;
 
 // Heater Control Buttons , triged between "cool down" and "heat PLA" state
@@ -195,7 +195,7 @@ constexpr uint16_t VP_Flowrate_E1 = 0x3092; // 2 Byte Integer
 
 constexpr uint16_t VP_Fan0_Percentage = 0x3100;  // 2 Byte Integer (0..100)
 constexpr uint16_t VP_Fan1_Percentage = 0x33A2;  // 2 Byte Integer (0..100)
-//constexpr uint16_t VP_Fan2_Percentage = 0x33A4;  // 2 Byte Integer (0..100)
+constexpr uint16_t VP_Fan2_Percentage = 0x33A4;  // 2 Byte Integer (0..100)
 //constexpr uint16_t VP_Fan3_Percentage = 0x33A6;  // 2 Byte Integer (0..100)
 
 constexpr uint16_t VP_Feedrate_Percentage = 0x3102; // 2 Byte Integer (0..100)
@@ -232,7 +232,7 @@ constexpr uint16_t VP_SD_Print_Filename = 0x32C0; //
 // Fan status
 constexpr uint16_t VP_FAN0_STATUS = 0x3300;
 constexpr uint16_t VP_FAN1_STATUS = 0x3302;
-//constexpr uint16_t VP_FAN2_STATUS = 0x3304;
+constexpr uint16_t VP_FAN2_STATUS = 0x3304;
 //constexpr uint16_t VP_FAN3_STATUS = 0x3306;
 
 // Heater status
