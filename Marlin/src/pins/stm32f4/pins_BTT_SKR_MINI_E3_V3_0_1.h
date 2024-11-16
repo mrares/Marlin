@@ -69,13 +69,18 @@
 //
 #define Z_MIN_PROBE_PIN                     PA1   // PROBE
 
-//
-// Filament Runout Sensor
-//
-#ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN                    PC15  // E0-STOP
-#endif
 
+#if defined(I_DRIVER_TYPE)
+  #define I_STOP_PIN                        PC15 // E0-STOP
+#else
+
+
+// Filament Runout Sensor
+
+  #ifndef FIL_RUNOUT_PIN
+    #define FIL_RUNOUT_PIN                    PC15  // E0-STOP
+  #endif
+#endif
 //
 // Power-loss Detection
 //
@@ -106,9 +111,17 @@
 #define Z_STEP_PIN                          PB1
 #define Z_DIR_PIN                           PB0
 
-#define E0_ENABLE_PIN                       PC3
-#define E0_STEP_PIN                         PC2
-#define E0_DIR_PIN                          PC1
+
+// #if defined(I_DRIVER_TYPE)
+  #define I_ENABLE_PIN                       PD0
+  #define I_DIR_PIN                          PD4
+  #define I_STEP_PIN                         PD5
+// #else
+//   #define E0_ENABLE_PIN                       PC3
+//   #define E0_STEP_PIN                         PC2
+//   #define E0_DIR_PIN                          PC1
+// #endif
+
 
 #if HAS_TMC_UART
   /**

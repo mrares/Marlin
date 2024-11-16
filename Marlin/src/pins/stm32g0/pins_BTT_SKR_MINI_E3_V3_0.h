@@ -63,11 +63,16 @@
 //
 #define Z_MIN_PROBE_PIN                     PC14  // PROBE
 
-//
-// Filament Runout Sensor
-//
-#ifndef FIL_RUNOUT_PIN
-  #define FIL_RUNOUT_PIN                    PC15  // E0-STOP
+
+#if defined(I_DRIVER_TYPE)
+  #define I_STOP_PIN                        PC15 // E0-STOP
+#else
+  //
+  // Filament Runout Sensor
+  //
+  #ifndef FIL_RUNOUT_PIN
+    #define FIL_RUNOUT_PIN                    PC15  // E0-STOP
+  #endif
 #endif
 
 //
@@ -96,9 +101,23 @@
 #define Z_STEP_PIN                          PB0
 #define Z_DIR_PIN                           PC5
 
-#define E0_ENABLE_PIN                       PD1
-#define E0_STEP_PIN                         PB3
-#define E0_DIR_PIN                          PB4
+#if defined(I_DRIVER_TYPE)
+  #define I_ENABLE_PIN                       PD0
+  #define I_DIR_PIN                          PD4
+  #define I_STEP_PIN                         PD5
+#endif
+
+#ifndef E_DRIVER_TYPE
+  #if defined(Z2_DRIVER_TYPE)
+    #define Z2_ENABLE_PIN                       PD1
+    #define Z2_STEP_PIN                         PB3
+    #define Z2_DIR_PIN                          PB4
+  #endif
+#else
+  #define E0_ENABLE_PIN                       PD1
+  #define E0_STEP_PIN                         PB3
+  #define E0_DIR_PIN                          PB4
+#endif
 
 #if HAS_TMC_UART
   /**
@@ -108,7 +127,15 @@
   #define X_HARDWARE_SERIAL  MSerial4
   #define Y_HARDWARE_SERIAL  MSerial4
   #define Z_HARDWARE_SERIAL  MSerial4
-  #define E0_HARDWARE_SERIAL MSerial4
+  
+  
+  #ifndef E_DRIVER_TYPE
+    #if defined(Z2_DRIVER_TYPE)
+      #define Z2_HARDWARE_SERIAL MSerial4
+    #endif
+  #else
+    #define E0_HARDWARE_SERIAL MSerial4
+  #endif
 
   // Default TMC slave addresses
   #ifndef X_SLAVE_ADDRESS
@@ -120,8 +147,17 @@
   #ifndef Z_SLAVE_ADDRESS
     #define Z_SLAVE_ADDRESS  1
   #endif
-  #ifndef E0_SLAVE_ADDRESS
-    #define E0_SLAVE_ADDRESS 3
+    
+  #ifndef E_DRIVER_TYPE
+    #if defined(Z2_DRIVER_TYPE)
+      #ifndef Z2_SLAVE_ADDRESS
+        #define Z2_SLAVE_ADDRESS 3
+      #endif
+    #endif
+  #else
+    #ifndef E0_SLAVE_ADDRESS
+      #define E0_SLAVE_ADDRESS 3
+    #endif
   #endif
 #endif
 
